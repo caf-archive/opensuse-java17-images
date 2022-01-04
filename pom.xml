@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2017-2021 Micro Focus or one of its affiliates.
+    Copyright 2022 Micro Focus or one of its affiliates.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -22,15 +22,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.cafapi</groupId>
-    <artifactId>opensuse-java11-images</artifactId>
-    <version>3.4.2-564</version>
+    <artifactId>opensuse-java17-images</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>openSUSE Java11 images</name>
-    <description>Two openSUSE-based images which includes the OpenJDK 11 Runtime Environment or the OpenJDK 11 Development Kit.</description>
-    <url>https://github.com/CAFapi/opensuse-java11-images</url>
+    <name>openSUSE Java17 images</name>
+    <description>Two openSUSE-based images which includes the OpenJDK 17 Runtime Environment or the OpenJDK 17 Development Kit.</description>
+    <url>https://github.com/CAFapi/opensuse-java17-images</url>
 
-    <inceptionYear>2017</inceptionYear>
+    <inceptionYear>2022</inceptionYear>
 
     <parent>
         <groupId>com.github.cafapi</groupId>
@@ -59,7 +59,8 @@
     </developers>
 
     <properties>
-        <copyrightYear>2021</copyrightYear>
+        <copyrightYear>2022</copyrightYear>
+        <copyrightNotice>Copyright ${copyrightYear} Micro Focus or one of its affiliates.</copyrightNotice>
         <maven.install.skip>true</maven.install.skip>
         <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
         <dockerHubOrganization>cafapi</dockerHubOrganization>
@@ -94,7 +95,7 @@
                     <autoPull>always</autoPull>
                     <images>
                         <image>
-                            <name>${dockerCafImagePrefix}opensuse-jre11${dockerProjectVersion}</name>
+                            <name>${dockerCafImagePrefix}opensuse-jre17${dockerProjectVersion}</name>
                             <build>
                                 <dockerFileDir>.</dockerFileDir>
                                 <dockerFile>Dockerfile.jre</dockerFile>
@@ -107,7 +108,7 @@
                             </build>
                         </image>
                         <image>
-                            <name>${dockerCafImagePrefix}opensuse-jdk11${dockerProjectVersion}</name>
+                            <name>${dockerCafImagePrefix}opensuse-jdk17${dockerProjectVersion}</name>
                             <build>
                                 <dockerFileDir>.</dockerFileDir>
                                 <dockerFile>Dockerfile.jdk</dockerFile>
@@ -138,9 +139,9 @@
     </build>
 
     <scm>
-        <connection>scm:git:https://github.com/CAFapi/opensuse-java11-images.git</connection>
-        <developerConnection>scm:git:https://github.com/CAFapi/opensuse-java11-images.git</developerConnection>
-        <url>https://github.com/CAFapi/opensuse-java11-images</url>
+        <connection>scm:git:https://github.com/CAFapi/opensuse-java17-images.git</connection>
+        <developerConnection>scm:git:https://github.com/CAFapi/opensuse-java17-images.git</developerConnection>
+        <url>https://github.com/CAFapi/opensuse-java17-images</url>
     </scm>
 
 </project>

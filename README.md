@@ -1,6 +1,6 @@
-# openSUSE and Java 11 images
+# openSUSE and Java 17 images
 
-This project builds two openSUSE-based image which include the OpenJDK 11 Runtime Environment or the OpenJDK 11 Development Kit and are based off the [OpenSUSE Base Image](https://github.com/CAFapi/opensuse-base-image). They can be used as a base image by projects which require Java 11.
+This project builds two openSUSE-based image which include the OpenJDK 17 Runtime Environment or the OpenJDK 17 Development Kit and are based off the [OpenSUSE Base Image](https://github.com/CAFapi/opensuse-base-image). They can be used as a base image by projects which require Java 17.
 
 ### Tini
 [Tini](https://github.com/krallin/tini) is pre-installed in the container.  If the image entrypoint is not overwritten then it will be automatically used.
