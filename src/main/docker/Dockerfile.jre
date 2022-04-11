@@ -23,7 +23,7 @@ FROM ${DOCKER_HUB_PUBLIC}/cafapi/opensuse-base:2 AS usual-base
 #
 # The actual image definition
 #
-FROM ${DOCKER_HUB_PUBLIC}/opensuse/tumbleweed:latest
+FROM ${DOCKER_HUB_PUBLIC}/opensuse/leap:15.4
 
 # Set the locale manually to a set inherited from the base image (defaults to POSIX)
 ENV LANG=en_US.utf8
