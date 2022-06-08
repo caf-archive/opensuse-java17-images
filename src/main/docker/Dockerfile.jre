@@ -14,40 +14,8 @@
 # limitations under the License.
 #
 
-# Docker registry
 ARG DOCKER_HUB_PUBLIC=docker.io
-
-# Reference the base image we normally use
-FROM ${DOCKER_HUB_PUBLIC}/cafapi/opensuse-base:2 AS usual-base
-
-#
-# The actual image definition
-#
-FROM ${DOCKER_HUB_PUBLIC}/opensuse/leap:15.4
-
-# Set the locale manually to a set inherited from the base image (defaults to POSIX)
-ENV LANG=en_US.utf8
-
-# Update the OS packages, install cURL, postgreSQL client and dejavu-fonts
-RUN zypper -n refresh && \
-    zypper -n update && \
-    zypper -n install curl postgresql dejavu-fonts && \
-    zypper -n clean --all
-
-# Copy gosu
-COPY --from=usual-base /usr/local/bin/gosu /usr/local/bin/gosu
-
-# Add scripts to be executed during startup
-COPY --from=usual-base /startup /startup
-
-# Add Tini
-ENV TINI_VERSION v0.18.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
-ENTRYPOINT ["/tini", "--", "/startup/startup.sh"]
-
-# Add other useful scripts
-COPY --from=usual-base /scripts /scripts
+FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.5.0-SNAPSHOT
 
 # Refresh the OS repositories and install OpenJDK 17 Runtime Environment
 RUN zypper -n refresh && \
