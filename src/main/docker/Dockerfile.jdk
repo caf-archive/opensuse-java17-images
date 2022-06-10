@@ -15,12 +15,39 @@
 #
 
 ARG DOCKER_HUB_PUBLIC=docker.io
-FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.5.0-SNAPSHOT
+
+#
+# Preliminary image that updates java.security to disable weaker SSL algorithms
+#
+FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.5.0-SNAPSHOT AS builder
 
 # Refresh the OS repositories and install OpenJDK 17 Development Kit
 RUN zypper -n refresh && \
     zypper -n update && \
     zypper -n install java-17-openjdk-devel && \
+    zypper al java-17-openjdk
+
+# Install Patch
+RUN zypper -n install patch
+
+# Set Java Home
+ENV JAVA_HOME=/usr/lib64/jvm/java-17-openjdk-17
+
+# Disable weaker security algorithms
+COPY disableWeakTlsAlgorithms.patch $JAVA_HOME/conf/security/
+RUN cd $JAVA_HOME/conf/security && \
+    patch -i disableWeakTlsAlgorithms.patch java.security
+
+#
+# The actual image definition
+#
+FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.5.0-SNAPSHOT
+
+# Refresh the OS repositories and install OpenJDK 11 Development Kit
+RUN zypper -n refresh && \
+    zypper -n update && \
+    zypper -n install java-17-openjdk-devel && \
+    zypper al java-17-openjdk && \
     zypper -n clean --all
 
 # Install Java certificate installation script
@@ -33,3 +60,6 @@ ENV JAVA_HOME=/usr/lib64/jvm/java-17-openjdk-17
 
 # Set JRE Home
 ENV JRE_HOME=/usr/lib64/jvm/java-17-openjdk-17
+
+# Disable weaker security algorithms
+COPY --from=builder $JAVA_HOME/conf/security/java.security* $JAVA_HOME/conf/security/
