@@ -22,6 +22,7 @@
  jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, RC4, DES, MD5withRSA, \
 -    DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL
 +    DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, \
++    AES_256_CBC, AES_128_CBC,\
 +    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, \
 +    TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, \
 +    TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256, \
