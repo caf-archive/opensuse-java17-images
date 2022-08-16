@@ -16,10 +16,6 @@
 
 # Docker registry
 ARG DOCKER_HUB_PUBLIC=docker.io
-
-#
-# Image that updates crypto-policies to disable weaker SSL algorithms
-#
 FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.6.0-US369215-SNAPSHOT
 
 # Refresh the OS repositories and install OpenJDK 17 Runtime Environment
