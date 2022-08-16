@@ -17,7 +17,7 @@
 # Docker registry
 ARG DOCKER_HUB_PUBLIC=docker.io
 
-FROM cafapi/opensuse-base:latest
+FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.6.0-US369215-SNAPSHOT
 
 # Refresh the OS repositories and install OpenJDK 17 Development Kit
 RUN zypper -n refresh && \
@@ -25,11 +25,6 @@ RUN zypper -n refresh && \
     zypper -n install java-17-openjdk-devel && \
     zypper al java-17-openjdk && \
     zypper -n clean --all
-
-# Install crypto-policies-scripts and disable weaker security algorithms
-RUN zypper -n install crypto-policies-scripts && \
-    update-crypto-policies --set FUTURE && \
-	zypper -n remove -u crypto-policies-scripts
 
 # Install Java certificate installation script
 ADD https://raw.githubusercontent.com/CAFapi/caf-common/v1.19.0/container-cert-script/install-ca-cert-java.sh \
