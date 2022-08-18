@@ -14,13 +14,15 @@
 # limitations under the License.
 #
 
+# Docker registry
 ARG DOCKER_HUB_PUBLIC=docker.io
-FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.5.0-SNAPSHOT
+FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.6.0-SNAPSHOT
 
 # Refresh the OS repositories and install OpenJDK 17 Development Kit
 RUN zypper -n refresh && \
     zypper -n update && \
     zypper -n install java-17-openjdk-devel && \
+    zypper al java-17-openjdk && \
     zypper -n clean --all
 
 # Install Java certificate installation script
