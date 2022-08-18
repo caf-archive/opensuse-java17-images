@@ -22,7 +22,8 @@ FROM ${DOCKER_HUB_PUBLIC}/cafapi/prereleases:opensuse-base-2.6.0-SNAPSHOT
 RUN zypper -n refresh && \
     zypper -n update && \
     zypper -n install java-17-openjdk && \
-    zypper al java-17-openjdk
+    zypper al java-17-openjdk && \
+    zypper -n clean --all
 
 # Install Java certificate installation script
 ADD https://raw.githubusercontent.com/CAFapi/caf-common/v1.19.0/container-cert-script/install-ca-cert-java.sh \
