@@ -21,13 +21,26 @@ FROM ${DOCKER_HUB_PUBLIC}/cafapi/opensuse-base:2
 # Refresh the OS repositories and install OpenJDK 17 Runtime Environment
 RUN zypper -n refresh && \
     zypper -n update && \
-    zypper -n install java-17-openjdk && \
+    zypper -n install java-17-openjdk mozilla-nss-tools && \
     zypper -n clean --all
 
 # Install Java certificate installation script
 ADD https://raw.githubusercontent.com/CAFapi/caf-common/v1.19.0/container-cert-script/install-ca-cert-java.sh \
     /startup/startup.d/
 RUN chmod +x /startup/startup.d/install-ca-cert-java.sh
+
+
+# Installing CA Certificate on openSUSE:
+# cp -v /test-keystore/test-cert.csr /etc/pki/trust/anchors/test-cert.csr.crt
+# Importing CA cert into Java Keystore on openSUSE:
+# keytool -noprompt -keystore /usr/lib64/jvm/jre/lib/security/cacerts -storepass changeit -importcert -alias caf-ssl-ca-cert-0 -file /test-keystore/test-cert.csr
+
+RUN echo "Removing cert install scripts..." && rm /startup/startup.d/install*cert*.sh
+
+# Add in the startup scripts
+COPY startup.d/ root/startup/startup.d/
+RUN chmod +x root/startup/startup.d/*
+
 
 # Set JRE Home
 ENV JRE_HOME=/usr/lib64/jvm/java-17-openjdk-17
