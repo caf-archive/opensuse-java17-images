@@ -29,13 +29,7 @@ ADD https://raw.githubusercontent.com/CAFapi/caf-common/v1.19.0/container-cert-s
     /startup/startup.d/
 RUN chmod +x /startup/startup.d/install-ca-cert-java.sh
 
-
-# Installing CA Certificate on openSUSE:
-# cp -v /test-keystore/test-cert.csr /etc/pki/trust/anchors/test-cert.csr.crt
-# Importing CA cert into Java Keystore on openSUSE:
-# keytool -noprompt -keystore /usr/lib64/jvm/jre/lib/security/cacerts -storepass changeit -importcert -alias caf-ssl-ca-cert-0 -file /test-keystore/test-cert.csr
-
-RUN echo "Removing cert install scripts..." && rm /startup/startup.d/install*cert*.sh
+# RUN echo "Removing cert install scripts..." && rm /startup/startup.d/install*cert*.sh
 
 # Add in the startup scripts
 COPY startup.d/ /startup/startup.d/

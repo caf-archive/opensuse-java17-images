@@ -27,5 +27,5 @@ certutil -N --empty-password -d /etc/pki/nssdb/
 echo "Contents of cert folder..."
 ls -l $MESOS_SANDBOX/$SSL_CA_CRT
 
-echo "Adding CA cert into NSS database on openSUSE"
-certutil -A -n test-cert -t "u,u,u" -d /etc/pki/nssdb/ -i $MESOS_SANDBOX/$SSL_CA_CRT
+# echo "Adding CA cert into NSS database on openSUSE"
+# certutil -A -n test-cert -t "u,u,u" -d /etc/pki/nssdb/ -i $MESOS_SANDBOX/$SSL_CA_CRT
