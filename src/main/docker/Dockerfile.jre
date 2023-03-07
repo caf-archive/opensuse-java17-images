@@ -38,8 +38,8 @@ RUN chmod +x /startup/startup.d/install-ca-cert-java.sh
 RUN echo "Removing cert install scripts..." && rm /startup/startup.d/install*cert*.sh
 
 # Add in the startup scripts
-COPY startup.d/ root/startup/startup.d/
-RUN chmod +x root/startup/startup.d/*
+COPY startup.d/ /startup/startup.d/
+RUN chmod +x /startup/startup.d/*
 
 
 # Set JRE Home
