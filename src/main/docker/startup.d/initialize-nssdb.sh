@@ -15,14 +15,8 @@
 # limitations under the License.
 #
 
-
-MESOS_SANDBOX=${SSL_CA_CRT_DIR:-$MESOS_SANDBOX}
-
 echo "Make /etc/pki/nssdb..."
 mkdir /etc/pki/nssdb
 
-echo "init nssdb..."
+echo "Initialize nssdb..."
 certutil -N --empty-password -d /etc/pki/nssdb/
-
-# echo "Adding CA cert into NSS database on openSUSE"
-# certutil -A -n test-cert -t "u,u,u" -d /etc/pki/nssdb/ -i $MESOS_SANDBOX/$SSL_CA_CRT
