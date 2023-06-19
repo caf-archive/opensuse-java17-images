@@ -1,0 +1,6 @@
+- dockerRepositoryId: cafapi/prereleases
+  imageName: opensuse-jdk17
+  tag: "1.1.1-182"
+- dockerRepositoryId: cafapi/prereleases
+  imageName: opensuse-jre17
+  tag: "1.1.1-182"
