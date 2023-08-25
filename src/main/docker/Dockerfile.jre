@@ -16,12 +16,14 @@
 
 # Docker registry
 ARG DOCKER_HUB_PUBLIC=docker.io
-FROM ${DOCKER_HUB_PUBLIC}/cafapi/opensuse-base:2
+FROM ${DOCKER_HUB_PUBLIC}/cafapi/opensuse-base:2 AS stage1
 
-# Refresh the OS repositories and install OpenJDK 17 Runtime Environment
+#
+# Stage 1: Refresh the OS repositories and install OpenJDK 17 Runtime Environment
+#
 RUN zypper -n refresh && \
     zypper -n update && \
-    zypper -n install java-17-openjdk mozilla-nss-tools && \
+    zypper -n install java-17-openjdk && \
     zypper -n clean --all
 
 # Install Java certificate installation script
@@ -35,3 +37,24 @@ RUN chmod +x /startup/startup.d/*
 
 # Set JRE Home
 ENV JRE_HOME=/usr/lib64/jvm/java-17-openjdk-17
+
+#
+# Stage 2: Install mozilla-nss-tools
+#
+FROM stage1 AS stage2
+
+RUN zypper -n install mozilla-nss-tools
+
+# Create the /etc/pki/nssdb directory
+mkdir /etc/pki/nssdb
+
+# Initialize nssdb
+certutil -N --empty-password -d /etc/pki/nssdb/
+
+#
+# Stage 3: Copy the initialized NSS db
+#
+FROM stage1
+
+# Copy gosu
+COPY --from=stage2 /etc/pki/nssdb /etc/pki/nssdb
