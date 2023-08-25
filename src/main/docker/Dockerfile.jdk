@@ -45,10 +45,10 @@ FROM stage1 AS stage2
 RUN zypper -n install mozilla-nss-tools
 
 # Create the /etc/pki/nssdb directory
-mkdir /etc/pki/nssdb
+RUN mkdir /etc/pki/nssdb
 
 # Initialize nssdb
-certutil -N --empty-password -d /etc/pki/nssdb/
+RUN certutil -N --empty-password -d /etc/pki/nssdb/
 
 #
 # Stage 3: Copy the initialized NSS db
