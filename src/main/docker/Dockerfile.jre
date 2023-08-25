@@ -52,5 +52,5 @@ certutil -N --empty-password -d /etc/pki/nssdb/
 #
 FROM stage1
 
-# Copy gosu
+# Copy nssdb
 COPY --from=stage2 /etc/pki/nssdb /etc/pki/nssdb
