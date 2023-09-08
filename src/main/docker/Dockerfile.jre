@@ -45,6 +45,7 @@ RUN zypper -n install mozilla-nss-tools
 
 RUN mkdir /etc/pki/nssdb
 RUN certutil -N --empty-password -d /etc/pki/nssdb/
+RUN chmod +r /etc/pki/nssdb/*
 
 #
 # Stage 3: The remainder of the actual image definition
@@ -53,7 +54,3 @@ FROM stage1
 
 # Copy nssdb
 COPY --from=stage2 /etc/pki/nssdb /etc/pki/nssdb
-
-# Set read permission for all users
-RUN chmod +r /etc/pki/nssdb/*
-
