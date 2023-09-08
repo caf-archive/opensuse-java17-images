@@ -53,3 +53,7 @@ FROM stage1
 
 # Copy nssdb
 COPY --from=stage2 /etc/pki/nssdb /etc/pki/nssdb
+
+# Set read permission for all users
+RUN chmod +r /etc/pki/nssdb/*
+
