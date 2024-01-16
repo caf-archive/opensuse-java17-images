@@ -23,7 +23,7 @@
 
     <groupId>com.github.cafapi</groupId>
     <artifactId>opensuse-java17-images</artifactId>
-    <version>1.4.2-SNAPSHOT</version>
+    <version>1.4.2-235</version>
     <packaging>pom</packaging>
 
     <name>openSUSE Java17 images</name>
