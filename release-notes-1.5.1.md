@@ -4,8 +4,8 @@ ${version-number}
 #### New Features
 - None
 
-#### Patch Fixes Included
-- This release includes OS package updates only.
+#### Bug Fixes
+- I907068: Fixed issue with non-root users being unable to write to the NSS directory.
 
 #### Known Issues
 - None
